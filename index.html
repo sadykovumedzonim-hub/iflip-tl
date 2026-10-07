@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>iFlip — перепродажа айфонов</title>
+<style>
+:root{--bg:#f2f2f7;--cd:#fff;--tx:#111;--mu:#8a8a8e;--ac:#0a84ff;--ln:#dcdce1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--cd:#1c1c1e;--tx:#f2f2f7;--ln:#38383a}}
+:root[data-theme="dark"]{--bg:#000;--cd:#1c1c1e;--tx:#f2f2f7;--ln:#38383a}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0;background:#000}
+body{display:flex;justify-content:center;font-family:-apple-system,"SF Pro Text",system-ui,Roboto,sans-serif;-webkit-tap-highlight-color:transparent;user-select:none}
+#ph{position:relative;width:100%;max-width:430px;height:100%;overflow:hidden;background:linear-gradient(165deg,#16245e,#5b3aa8 42%,#e0587f 78%,#ffb066)}
+#sb{position:absolute;top:0;left:0;right:0;height:44px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:0 30px;color:#fff;font:600 15px inherit;transition:color .3s;pointer-events:none}
+#nt{position:absolute;left:50%;top:0;width:158px;height:30px;margin-left:-79px;background:#000;border-radius:0 0 20px 20px;z-index:51}
+.inapp #sb{color:var(--tx)}
+#home{position:absolute;inset:0;padding:56px 16px 0;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:94px;transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s}
+.inapp #home,.inapp #dock{transform:scale(.9);filter:blur(6px) brightness(.8)}
+.ic{display:flex;flex-direction:column;align-items:center;gap:5px;color:#fff;font-size:11px;text-shadow:0 1px 3px #0006;transition:transform .2s cubic-bezier(.3,1.6,.5,1),filter .15s;cursor:pointer}
+.ic:active{transform:scale(.86);filter:brightness(.65)}
+.ic i{width:60px;height:60px;border-radius:14px;display:grid;place-items:center;font:normal 30px/1 sans-serif;box-shadow:0 2px 6px #0003}
+#dock{position:absolute;left:10px;right:10px;bottom:24px;height:92px;border-radius:34px;background:#ffffff40;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);display:flex;justify-content:space-around;align-items:center;transition:transform .45s,filter .45s}
+#dock .ic{font-size:0}
+#dots{position:absolute;bottom:126px;left:0;right:0;text-align:center;color:#fff;letter-spacing:6px;font-size:9px}
+#ind{position:absolute;bottom:0;left:0;right:0;height:28px;z-index:60}
+#ind:after{content:"";position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:#fff;transition:background .3s}
+.inapp #ind:after{background:var(--tx)}
+#app{position:absolute;inset:0;background:var(--bg);color:var(--tx);display:flex;flex-direction:column;padding-top:44px;border-radius:44px;transform:scale(.1);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .25s,border-radius .45s;z-index:40}
+#app.open{transform:none;opacity:1;pointer-events:auto;border-radius:0}
+#ah{display:flex;align-items:center;justify-content:space-between;padding:4px 14px;font-weight:700;font-size:17px;min-height:36px}
+#ah b{color:var(--ac);font-weight:500;cursor:pointer}
+#ab{flex:1;overflow:auto;padding:8px 14px 40px}
+.cd{background:var(--cd);border-radius:14px;padding:12px;margin-bottom:10px;display:flex;gap:10px;align-items:center}
+.cd>div{flex:1;min-width:0}.cd small{color:var(--mu);display:block;font-size:13px}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:12px;padding:10px 14px;font:600 15px inherit;transition:transform .15s cubic-bezier(.3,1.6,.5,1),filter .15s}
+.btn:active{transform:scale(.93);filter:brightness(.8)}.btn.g{background:#2ec14e}.btn.r{background:#ff453a}
+.tabs{display:flex;background:var(--ln);border-radius:10px;padding:2px;margin-bottom:12px}
+.tabs span{flex:1;text-align:center;padding:7px;border-radius:8px;font-weight:600;font-size:14px;transition:background .2s}.tabs .on{background:var(--cd)}
+.pr{font-weight:800;font-size:17px}
+input{font:16px inherit;padding:10px;border-radius:12px;border:1px solid var(--ln);background:var(--cd);color:var(--tx);min-width:0;user-select:text}
+#cm{display:flex;flex-direction:column;min-height:50vh}
+.b{max-width:78%;padding:8px 12px;border-radius:17px;margin:3px 0;font-size:15px}
+.me{background:var(--ac);color:#fff;align-self:flex-end}.he{background:var(--cd)}
+.row{display:flex;gap:8px;margin:10px 0}.row input{flex:1}
+#ts{position:absolute;top:56px;left:50%;transform:translate(-50%,-90px);background:#222e;color:#fff;padding:10px 16px;border-radius:20px;z-index:70;font-size:14px;transition:transform .4s cubic-bezier(.3,1.4,.5,1);max-width:80%;text-align:center}
+#ts.s{transform:translate(-50%,0)}
+.bar{height:10px;border-radius:5px;background:var(--ln);overflow:hidden}.bar i{display:block;height:100%;background:#2ec14e}
+</style></head><body>
+<div id="ph">
+<div id="sb"><span id="tm">9:41</span><span>📶 🔋</span></div><div id="nt"></div>
+<div id="home"></div><div id="dots">● ○</div><div id="dock"></div>
+<div id="app"><div id="ah"></div><div id="ab"></div></div>
+<div id="ind"></div><div id="ts"></div>
+</div>
+<script>
+const B={10:8000,11:12000,12:17000,13:23000,14:30000,15:42000,16:55000,17:70000,18:88000};
+const MF={64:.92,128:1,256:1.1,512:1.22},CN=[['идеальное',1],['хорошее',.93],['царапины',.84],['разбит экран',.68]];
+const NM=['Алексей','Дмитрий','Игорь','Марина','Саша','Олег','Катя','Виктор','Руслан','Анна'];
+const INS=['Ищи дураков, за такие деньги не отдам.','Ты серьёзно? Ищи дураков в другом месте.','Ищи дураков. Это даже не смешно.'];
+const rnd=Math.random,pick=a=>a[Math.floor(rnd()*a.length)],r100=x=>Math.round(x/100)*100,f=n=>n.toLocaleString('ru-RU')+' ₽';
+const nm=p=>'iPhone '+p.m+' '+p.mem+'GB';
+let S,T='buy',N=null,cur=null,dbl=0;
+function init(){S={m:10000,day:1,debt:0,momDay:-9,inv:[],ads:[],pm:{},mkt:[],id:0,won:0};for(const k in B)S.pm[k]=1;gen()}
+function load(){try{S=JSON.parse(localStorage.getItem('iflip'))}catch(e){S=null}if(!S||typeof S.m!=='number')init()}
+function save(){try{localStorage.setItem('iflip',JSON.stringify(S))}catch(e){}}
+const val=p=>r100(B[p.m]*S.pm[p.m]*MF[p.mem]*CN[p.c][1]);
+function mk(cheap){const m=cheap?pick([10,11,12]):pick(Object.keys(B).map(Number));return{id:++S.id,m,mem:pick([64,128,256,512].slice(m>=15?1:0,m>=17?4:3)),c:Math.floor(rnd()*4),bat:70+Math.floor(rnd()*30)}}
+function gen(){S.mkt=[];for(let i=0;i<7;i++){const p=mk(i<3),v=val(p);S.mkt.push({p,ask:r100(v*(1.05+rnd()*.25)),lim:r100(v*(.78+rnd()*.14)),who:pick(NM)})}save()}
+function toast(t){const e=ts;e.textContent=t;e.classList.add('s');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('s'),2200)}
+function day(){S.day++;S.debt=Math.round(S.debt*1.05);for(const k in S.pm)S.pm[k]=Math.min(1.2,Math.max(.8,S.pm[k]*(.96+rnd()*.1)));gen()}
+function chk(){if(S.m>=500000&&!S.won){S.won=1;toast('🏆 Ты накопил 500 000 ₽ — ты король перепродажи!')}save()}
+// home
+const APPS=[['💬','Сообщения','linear-gradient(#5be66e,#1dbb3c)'],['','Календарь','#fff','cal'],['🌸','Фото','linear-gradient(135deg,#ffd,#fbc)'],['📷','Камера','linear-gradient(#bbb,#666)'],
+['🗺️','Карты','linear-gradient(#8ee,#5b8)'],['🕒','Часы','#111'],['⛅','Погода','linear-gradient(#4aa8ff,#2670d9)'],['📝','Заметки','linear-gradient(#ffe36b,#f7c600)'],
+['💳','Кошелёк','#111','wallet'],['💼','Заработок','linear-gradient(#ffb340,#ff7a00)','jobs'],['','авито','radial-gradient(circle at 34% 32%,#04e061 0 17%,#0000 18%),radial-gradient(circle at 66% 32%,#0af 0 17%,#0000 18%),radial-gradient(circle at 34% 66%,#965eeb 0 17%,#0000 18%),radial-gradient(circle at 66% 66%,#ff4053 0 17%,#0000 18%),#fff','avito'],['⚙️','Настройки','linear-gradient(#c8c8cc,#8e8e93)','set']];
+const DOCK=[['📞','','linear-gradient(#5be66e,#1dbb3c)'],['🧭','','linear-gradient(#4aa8ff,#0a60ff)'],['💬','','linear-gradient(#5be66e,#1dbb3c)'],['🎵','','linear-gradient(#ff6b8b,#ff2d55)']];
+const ic=(a,i)=>`<div class="ic" onclick="openApp(this,'${a[3]||''}')"><i style="background:${a[2]};${a[3]=='cal'?'color:#111;flex-direction:column;font-size:26px;font-weight:300':''}">${a[3]=='cal'?'<small style="color:#f33;font-size:10px;font-weight:700">День</small>'+S.day:a[3]=='avito'?'':a[0]}</i>${a[1]}</div>`;
+function home(){document.getElementById('home').innerHTML=APPS.map(ic).join('');dock.innerHTML=DOCK.map(ic).join('')}
+function openApp(el,id){if(!id){toast('Это приложение не нужно для игры');return}
+const r=el.querySelector('i').getBoundingClientRect(),p=ph.getBoundingClientRect();
+app.style.transformOrigin=(r.left-p.left+30)+'px '+(r.top-p.top+30)+'px';cur=id;T='buy';N=null;R();ph.classList.add('inapp');requestAnimationFrame(()=>app.classList.add('open'))}
+function close(){app.classList.remove('open');ph.classList.remove('inapp');cur=null;N=null;home()}
+ind.onclick=()=>cur&&close();let y0=0;ind.onpointerdown=e=>y0=e.clientY;
+// app router
+function hd(t,back){ah.innerHTML=`<b onclick="${back||'close()'}">‹ ${back?'Назад':'Домой'}</b><span>${t}</span><span style="color:var(--mu);font-weight:500;font-size:14px">${f(S.m)}</span>`}
+function R(){if(cur=='avito')return N?chat():avito();if(cur=='jobs')return jobs();if(cur=='wallet')return wallet();if(cur=='set')return sett()}
+function avito(){hd('Авито');const tabs=`<div class="tabs"><span class="${T=='buy'?'on':''}" onclick="T='buy';R()">Купить</span><span class="${T=='sell'?'on':''}" onclick="T='sell';R()">Продать</span></div>`;let h=tabs;
+if(T=='buy'){h+=S.mkt.map((o,i)=>`<div class="cd" onclick="openBuy(${i})"><span style="font-size:34px">📱</span><div><b>${nm(o.p)}</b><small>${CN[o.p.c][0]} · АКБ ${o.p.bat}% · ${o.who}</small></div><span class="pr">${f(o.ask)}</span></div>`).join('')||'<p style="text-align:center;color:var(--mu)">Объявлений нет</p>';
+h+=`<button class="btn" style="width:100%" onclick="gen();R()">Обновить ленту</button>`}
+else{h+=`<b>Мои телефоны</b><div style="height:8px"></div>`+(S.inv.map((p,i)=>`<div class="cd" style="flex-wrap:wrap"><span style="font-size:30px">📱</span><div><b>${nm(p)}</b><small>${CN[p.c][0]} · рынок ≈ ${f(val(p))}</small></div><input id="pr${i}" type="number" inputmode="numeric" value="${r100(val(p)*1.1)}" style="width:100px"><button class="btn g" onclick="listIt(${i})">Выставить</button></div>`).join('')||'<p style="color:var(--mu)">Пусто. Купи телефон во вкладке «Купить».</p>');
+h+=`<b>Мои объявления</b><div style="height:8px"></div>`+(S.ads.map((a,i)=>`<div class="cd"><span style="font-size:30px">🏷️</span><div><b>${nm(a.p)}</b><small>Цена ${f(a.ask)}</small></div><button class="btn" onclick="openSell(${i})">Сообщения</button></div>`).join('')||'<p style="color:var(--mu)">Нет объявлений</p>')}
+ab.innerHTML=h}
+function listIt(i){const v=+document.getElementById('pr'+i).value;if(v<500)return toast('Укажи цену от 500 ₽');const p=S.inv[i];S.ads=S.ads.filter(a=>a.p.id!=p.id);S.ads.push({p,ask:v});save();toast('Объявление выложено');R()}
+// negotiation
+function openBuy(i){const o=S.mkt[i];N={t:'buy',o,p:o.p,ask:o.ask,lim:o.lim,pat:3,first:1,last:o.ask,log:[['he',`Здравствуйте! ${nm(o.p)}, ${CN[o.p.c][0]}, батарея ${o.p.bat}%. Цена ${f(o.ask)}, торг не предусмотрен.`]]};chat()}
+function openSell(i){const a=S.ads[i],v=val(a.p);if(rnd()>(a.ask<=v*1.3?.85:.35)){toast('Пока никто не написал');return}
+const lim=r100(v*(.85+rnd()*.23));N={t:'sell',a,p:a.p,ask:a.ask,lim,pat:3,last:0,log:[]};
+if(a.ask<=lim){N.last=a.ask;N.log.push(['he',`Беру за ${f(a.ask)}! Когда встретимся?`])}
+else{N.last=r100(lim*(.72+rnd()*.1));N.log.push(['he',`Добрый день! ${nm(a.p)} ещё продаёте? Отдадите за ${f(N.last)}?`])}chat()}
+function chat(){hd(N.t=='buy'?N.o.who:'Покупатель','N=null;R()');
+ab.innerHTML=`<div id="cm">${N.log.map(m=>`<div class="b ${m[0]}">${m[1]}</div>`).join('')}</div>`+(N.over?`<p style="text-align:center;color:var(--mu)">Диалог завершён</p>`:`<div class="row"><input id="ci" placeholder="Напишите сообщение с ценой…" onkeydown="if(event.key=='Enter')send()"><button class="btn" onclick="send()">➤</button></div>${N.last?`<button class="btn g" style="width:100%" onclick="deal(${N.last})">${N.t=='buy'?'Купить':'Продать'} за ${f(N.last)}</button>`:''}`);ab.scrollTop=ab.scrollHeight}
+function parse(t){t=t.replace(/(\d)[\s.](?=\d{3}\b)/g,'$1');const m=[...t.matchAll(/(\d+)\s*(к|k|тыс)?/gi)].map(x=>+x[1]*(x[2]?1000:1)).filter(x=>x>=1000);return m.length?Math.max(...m):null}
+function send(){const t=ci.value.trim();if(!t||N.over)return;N.log.push(['me',t]);const n=parse(t),say=s=>N.log.push(['he',s]);
+if(n===null)say('Напишите цену цифрами, например «отдам за 9000».');
+else if(N.t=='buy'){
+ if(n>=N.lim){const d=Math.min(n,N.ask);say(`Ладно, по рукам. ${f(d)}.`);N.last=d;chat();return deal(d)}
+ N.pat--;if(N.pat<=0){say('Всё, надоело. Не продаю.');N.over=1;S.mkt=S.mkt.filter(x=>x!==N.o);save()}
+ else if(n/N.lim<.78)say(pick(INS));
+ else if(N.first){N.first=0;say('Цену не скину, она и так низкая. Берёте?')}
+ else{const c=Math.min(N.last,r100(N.lim+(N.ask-N.lim)*(N.pat/3)*.6));N.last=c;N.ask=c;say(`Ну ладно, скину до ${f(c)}. Это последняя цена.`)}}
+else{
+ if(n<=N.lim){say(`Хорошо, беру за ${f(n)}!`);N.last=n;chat();return deal(n)}
+ N.pat--;if(N.pat<=0){say('Не договорились, поищу другой вариант.');N.over=1}
+ else if(n/N.lim>1.35)say('Вы шутите? За эти деньги новый куплю.');
+ else{const c=r100(N.lim*(.93+(N.pat/3)*.07));N.last=c;say(`Могу дать ${f(c)}, больше не потяну.`)}}
+chat();ci.focus()}
+function deal(price){if(N.t=='buy'){if(S.m<price)return toast('Не хватает денег. Заработай в «Заработок»');S.m-=price;S.inv.push(N.p);S.mkt=S.mkt.filter(x=>x!==N.o);toast('Куплено: '+nm(N.p)+' за '+f(price))}
+else{S.m+=price;const id=N.p.id;S.inv=S.inv.filter(p=>p.id!=id);S.ads=S.ads.filter(a=>a.p.id!=id);toast('Продано за '+f(price)+(price>val(N.p)?' 🔥':''))}
+N=null;chk();R()}
+// jobs
+function jobs(){hd('Заработок');const cd=S.day-S.momDay;
+ab.innerHTML=`<div class="cd"><span style="font-size:32px">🚴</span><div><b>Подработка курьером</b><small>+1 200…2 500 ₽, уходит день</small></div><button class="btn g" onclick="job()">Работать</button></div>
+<div class="cd"><span style="font-size:32px">👩</span><div><b>Попросить у мамы</b><small>1 000…3 000 ₽, не чаще раза в 4 дня</small></div><button class="btn" onclick="mom()">Просить</button></div>
+<div class="cd"><span style="font-size:32px">🤝</span><div><b>Взять в долг</b><small>+5% к долгу каждый день. Долг: ${f(S.debt)}</small></div><div style="flex:0;display:flex;flex-direction:column;gap:6px"><button class="btn r" onclick="loan()">+5 000</button><button class="btn" onclick="repay()">Вернуть</button></div></div>
+<button class="btn" style="width:100%;background:#8e8e93" onclick="day();toast('Прошёл день '+S.day+'. Цены на рынке изменились');jobs()">Ждать следующий день (день ${S.day})</button>`}
+function job(){const g=r100(1200+rnd()*1300);S.m+=g;day();toast('Заработал '+f(g)+'. День '+S.day);chk();jobs()}
+function mom(){if(S.day-S.momDay<4)return toast('Мама: «Сынок, ты недавно брал. Заработай сам!»');const g=r100(1000+rnd()*2000);S.m+=g;S.momDay=S.day;toast('Мама дала '+f(g)+' ❤️');chk();jobs()}
+function loan(){S.m+=5000;S.debt+=5000;toast('Взял в долг 5 000 ₽');chk();jobs()}
+function repay(){if(!S.debt)return toast('Долгов нет');if(S.m<S.debt)return toast('Не хватает денег на долг');S.m-=S.debt;S.debt=0;toast('Долг возвращён');save();jobs()}
+function wallet(){hd('Кошелёк');const iv=S.inv.reduce((s,p)=>s+val(p),0),net=S.m+iv-S.debt;
+ab.innerHTML=`<div class="cd"><div><small>Баланс</small><span class="pr" style="font-size:28px">${f(S.m)}</span></div></div>
+<div class="cd"><div><small>Долг</small><b>${f(S.debt)}</b></div><div><small>День</small><b>${S.day}</b></div><div><small>Капитал</small><b>${f(net)}</b></div></div>
+<div class="cd" style="display:block"><b>Цель: 500 000 ₽</b><div class="bar" style="margin-top:8px"><i style="width:${Math.max(0,Math.min(100,net/5000))}%"></i></div></div>
+<b>Склад</b><div style="height:8px"></div>`+(S.inv.map(p=>`<div class="cd"><span style="font-size:28px">📱</span><div><b>${nm(p)}</b><small>${CN[p.c][0]} · АКБ ${p.bat}%</small></div><span>≈ ${f(val(p))}</span></div>`).join('')||'<p style="color:var(--mu)">Склад пуст</p>')}
+function sett(){hd('Настройки');ab.innerHTML=`<button class="btn r" style="width:100%" onclick="if(dbl++){init();dbl=0;toast('Игра сброшена');sett()}else toast('Нажми ещё раз для сброса')">Начать заново</button>`}
+setInterval(()=>tm.textContent=new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}),1000);tm.textContent=new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+try{const s=document.createElement('script');s.src='https://telegram.org/js/telegram-web-app.js';s.onload=()=>{const w=Telegram.WebApp;w.ready();w.expand()};document.head.appendChild(s)}catch(e){}
+load();home();
+</script></body></html>
